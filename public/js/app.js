@@ -4,11 +4,21 @@ const weatherForm = document.querySelector('form')
 const search = document.querySelector('input')
 const messageOne = document.querySelector('#message-1')
 const messageTwo = document.querySelector('#message-2')
+const myLocation = document.querySelector('#my-location')
+
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
+    
 
     const location = search.value
+    
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.latitude, position.coords.longitude)
+        latitude = position.coords.latitude
+        longitude = position.coords.longitude
+    })
 
     messageOne.textContent = 'Loading...'
     messageTwo.textContent = ''
@@ -23,4 +33,24 @@ weatherForm.addEventListener('submit', (e) => {
             }
         })
     })
+})
+
+myLocation.addEventListener('click', (e) => {
+    e.preventDefault()
+    navigator.geolocation.getCurrentPosition((position) => {
+        fetch('/weather?lat=' + position.coords.latitude + '&log=' + position.coords.longitude).then((response) => {
+                response.json().then((data) => {
+                    if (data.error) {
+                        messageOne.textContent = data.error
+                    } else {
+                        messageOne.textContent = data.location
+                        messageTwo.textContent = data.forecast
+                    }
+                })
+            })
+    })
+
+    messageOne.textContent = 'Loading...'
+    messageTwo.textContent = ''
+
 })

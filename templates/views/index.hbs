@@ -15,11 +15,18 @@
         {{>header}}
 
         <p>Use this site to get your weather!</p>
-
-        <form>
-            <input placeholder="Location">
-            <button>Search</button>
-        </form>
+        <div>
+            <p>Click below to get your current location weather!</p>
+            <button id="my-location">Current Location</button>
+        </div>       
+        <div>
+            <p>Or Get weather for a location!</p>
+            <form>
+                <input placeholder="Enter Location">
+                <button>Search</button>
+            </form>
+        </div>
+        
 
         <p id="message-1"></p>
         <p id="message-2"></p>
@@ -28,6 +35,6 @@
     {{>footer}}
 
     <script src="/js/app.js"></script>
-</body>
+</body> 
 
 </html>
