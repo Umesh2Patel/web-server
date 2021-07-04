@@ -49,10 +49,10 @@ app.get('/weather', (req, res) => {
             if (error) {
                 return res.send({ error })
             }
-    
+            const url = `https://google.com/maps?q=${req.query.lat},${req.query.log}`
             res.send({
                 forecast: forecastData,
-                location: 'Current Location',
+                location: url,
                 address: req.query.address
             })
         })
